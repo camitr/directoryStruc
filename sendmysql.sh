@@ -1,6 +1,7 @@
 #!/bin/bash
 
-
+#store cd path in the file 
+lsblk |awk 'END {print $NF}' > dirname
 path=`cat dirname`
 
 #create path sed remove trailing '/' awk print data in desired columns 
