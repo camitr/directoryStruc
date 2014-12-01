@@ -27,7 +27,8 @@ foreach ($list as &$value) {
 				}	
 }
 
-$output = shell_exec("mount| grep /media | awk '{print $3 \"@\" }'");
+# regex with white spaces
+$output = shell_exec("mount| grep /media/|awk '{print $3 \"\ \"$4 \"@\"}'| sed 's/\\\ type/ /'");
 
 $list=explode("@", $output);
 

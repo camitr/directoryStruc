@@ -2,7 +2,14 @@
 
 #store cd path in the file 
 lsblk |awk 'END {print $NF}' > dirname
-path=`cat dirname`
+#path=`cat dirname`
+
+#give the mount path of usb disk 
+#mount|grep /media|awk '{print $3}'
+
+#mysql connection to get path for scan 
+path=`mysql -uroot -p123 -s -N -e "select name from dirstruc.system_drives ;"`
+  echo $path
 
 #create path sed remove trailing '/' awk print data in desired columns 
 tree --dirsfirst -h -fi -DF --noreport $path| tr -d []|sed 's/\/$//'|awk  '{print $5","$1","$3","$2","$4}'> final1
